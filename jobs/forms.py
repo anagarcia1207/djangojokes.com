@@ -10,13 +10,13 @@ class JobApplicationForm(forms.Form):
 
 
     DAYS = (
-        ('sun', 'Sunday'),
-        ('mon', 'Monday'),
-        ('tue', 'Tuesday'),
-        ('wed', 'Wednesday'),
-        ('thu', 'Thursday'),
-        ('fri', 'Friday'),
-        ('sat', 'Saturday')
+        ('1', 'Sunday'),
+        ('2', 'Monday'),
+        ('3', 'Tuesday'),
+        ('4', 'Wednesday'),
+        ('5', 'Thursday'),
+        ('6', 'Friday'),
+        ('7', 'Saturday')
     )
 
     YEARS = range(1900, datetime.now().year+1)
