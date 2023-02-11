@@ -131,3 +131,5 @@ dmypy.json
 # MY ADDITIONS
 solutions
 starter-code
+
+local_settings.py
