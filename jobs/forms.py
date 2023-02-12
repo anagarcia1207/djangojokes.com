@@ -42,11 +42,11 @@ class JobApplicationForm(forms.Form):
     )
     employment_type = forms.ChoiceField(choices=EMPLOYMENT)
     start_date = forms.DateField(
-        required=False,
+        help_text='The earliest date you can start working.',
         widget=forms.SelectDateWidget(
-            years= ['2023', '2024'],
-            empty_label=("Choose Year", "Choose Month", "Choose Day")
-        )
+            years=['2023', '2024'],
+            attrs={'style': 'width: 31%; display: inline-block; margin: 0 1%'}
+        ),
     )
     available_days = forms.TypedMultipleChoiceField(
         choices=DAYS,
