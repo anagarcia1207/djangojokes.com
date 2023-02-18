@@ -11,9 +11,9 @@ class Joke(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT
     )
     category = models.ForeignKey(
-        'Category', on_delete=models.PROTECT
+        'Category', on_delete=models.PROTECT, related_name='jokes'
     )
-    tags = models.ManyToManyField('Tag', blank=True)
+    tags = models.ManyToManyField('Tag', blank=True, related_name='jokes')
     slug = models.SlugField(
     max_length=50, unique=True, null=False, editable=False
 )
@@ -77,3 +77,24 @@ class Tag(models.Model):
         return self.tag
     class Meta:
         ordering = ['tag']
+
+
+class JokeVote(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        related_name='jokevotes'
+    )
+    joke = models.ForeignKey(
+        Joke, on_delete=models.CASCADE,
+        related_name='jokevotes'
+    )
+    vote = models.SmallIntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'joke'], name='one_vote_per_user_per_joke'
+            )
+        ]
