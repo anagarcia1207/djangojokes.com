@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 
 from common.utils.text import unique_slug
-from django.db.models import Avg
+from django.db.models import Avg, Count, Sum
 
 class Joke(models.Model):
     question = models.TextField(max_length=200)
@@ -134,18 +134,6 @@ class JokeVote(models.Model):
     vote = models.SmallIntegerField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
-    @property
-    def num_votes(self):
-        return self.jokevotes.count()
-
-    @property
-    def num_likes(self):
-        return self.jokevotes.filter(vote=1).count()
-
-    @property
-    def num_dislikes(self):
-        return self.jokevotes.filter(vote=-1).count()
 
     class Meta:
         constraints = [
