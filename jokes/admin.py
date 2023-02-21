@@ -1,3 +1,4 @@
+from common.admin import DjangoJokesAdmin
 from django.contrib import admin
 
 from .models import Category, Joke, JokeVote, Tag
@@ -15,7 +16,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Joke)
-class JokeAdmin(admin.ModelAdmin):
+class JokeAdmin(DjangoJokesAdmin):
     model = Joke
     list_display = ['question', 'created', 'updated']
 
